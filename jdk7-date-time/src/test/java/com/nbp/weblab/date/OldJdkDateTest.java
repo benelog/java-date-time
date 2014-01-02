@@ -4,6 +4,7 @@ import static org.fest.assertions.api.Assertions.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 import org.junit.Test;
@@ -98,6 +99,7 @@ public class OldJdkDateTest {
 		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 		assertThat(dayOfWeek).isEqualTo(Calendar.WEDNESDAY);		
 		assertThat(dayOfWeek).isEqualTo(4);
-		assertThat(calendar.getTime().getDay()).isEqualTo(3);
+		Date theDate = calendar.getTime();
+		assertThat(theDate.getDay()).isEqualTo(3);
 	}
 }
