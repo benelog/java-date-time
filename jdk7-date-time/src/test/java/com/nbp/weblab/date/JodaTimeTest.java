@@ -8,6 +8,7 @@ import org.joda.time.DateTimeConstants;
 import org.joda.time.DateTimeZone;
 import org.joda.time.IllegalFieldValueException;
 import org.joda.time.LocalDate;
+import org.joda.time.chrono.GJChronology;
 import org.joda.time.chrono.GregorianChronology;
 import org.junit.Test;
 
@@ -22,6 +23,17 @@ public class JodaTimeTest {
 		
 		LocalDate nextDay = theDay.plusDays(1);
 		assertThat(nextDay.toString(pattern)).isEqualTo("1582.10.05");
+	}
+	
+	@Test
+	public void shouldGetAfterOneDayWithGJChronology() {
+		Chronology chrono = GJChronology.getInstance();
+		LocalDate theDay = new LocalDate(1582, 10, 4, chrono);
+		String pattern = "yyyy.MM.dd";
+		assertThat(theDay.toString(pattern)).isEqualTo("1582.10.04");
+		
+		LocalDate nextDay = theDay.plusDays(1);
+		assertThat(nextDay.toString(pattern)).isEqualTo("1582.10.15");
 	}
 	
 	@Test
