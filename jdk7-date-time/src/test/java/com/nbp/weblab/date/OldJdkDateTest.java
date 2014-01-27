@@ -89,7 +89,14 @@ public class OldJdkDateTest {
 		assertThat(calendar.get(Calendar.MONTH)).isEqualTo(Calendar.JANUARY);		
 		assertThat(calendar.get(Calendar.DAY_OF_MONTH)).isEqualTo(31);		
 	}
-
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void shouldNotAcceptWrongMonth() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setLenient(false);
+		calendar.set(1999, 12, 31);
+		calendar.get(Calendar.MONTH);
+	}
 	
 	@Test
 	@SuppressWarnings("deprecation")

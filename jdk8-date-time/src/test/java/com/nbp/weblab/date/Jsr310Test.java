@@ -3,6 +3,7 @@ package com.nbp.weblab.date;
 import static org.fest.assertions.api.Assertions.*;
 
 import org.junit.Test;
+
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.time.chrono.IsoChronology;
 import java.time.format.DateTimeFormatter;
 import java.time.zone.ZoneRules;
 import java.time.zone.ZoneRulesException;
+import java.time.DateTimeException;
 
 public class Jsr310Test {
 	@Test
@@ -73,6 +75,12 @@ public class Jsr310Test {
 		assertThat(theDay.getMonthValue()).isEqualTo(12);		
 		assertThat(theDay.getDayOfMonth()).isEqualTo(31);		
 	}
+	
+	@Test(expected=DateTimeException.class)
+	public void shouldNotAcceptWrongDate() {
+		LocalDate.of(1999, 13, 31);
+	}
+
 	
 	@Test
 	public void shouldGetDayOfWeek() {

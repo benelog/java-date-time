@@ -6,6 +6,7 @@ import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.DateTimeZone;
+import org.joda.time.IllegalFieldValueException;
 import org.joda.time.LocalDate;
 import org.joda.time.chrono.GregorianChronology;
 import org.junit.Test;
@@ -70,6 +71,11 @@ public class JodaTimeTest {
 		assertThat(theDay.getYear()).isEqualTo(1999);
 		assertThat(theDay.getMonthOfYear()).isEqualTo(12);		
 		assertThat(theDay.getDayOfMonth()).isEqualTo(31);		
+	}
+	
+	@Test (expected=IllegalFieldValueException.class)
+	public void shouldNotAcceptWrongMonth() {
+		new LocalDate(1999, 13, 31);
 	}
 	
 	@Test

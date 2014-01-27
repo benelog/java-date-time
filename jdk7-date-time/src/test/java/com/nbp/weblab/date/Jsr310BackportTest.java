@@ -3,6 +3,7 @@ package com.nbp.weblab.date;
 import static org.fest.assertions.api.Assertions.*;
 
 import org.junit.Test;
+import org.threeten.bp.DateTimeException;
 import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;
@@ -72,6 +73,11 @@ public class Jsr310BackportTest {
 		assertThat(theDay.getYear()).isEqualTo(1999);
 		assertThat(theDay.getMonthValue()).isEqualTo(12);		
 		assertThat(theDay.getDayOfMonth()).isEqualTo(31);		
+	}
+	
+	@Test(expected=DateTimeException.class)
+	public void shouldNotAcceptWrongDate() {
+		LocalDate.of(1999, 13, 31);
 	}
 	
 	@Test
